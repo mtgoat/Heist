@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace heist
 {
@@ -6,7 +7,83 @@ namespace heist
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Plan Your Heist!");
+            List<teamMember> myTeam = new List<teamMember>();
+            Console.WriteLine("What is the bank difficulty?");
+            int bankDifficulty = int.Parse(Console.ReadLine());
+
+            for (int i=0;i==i;i++){
+            Console.WriteLine($"Enter team member number {i+1}'s name?");
+            string name = Console.ReadLine ();
+            if(name == ""){
+                    break;
+                }
+            Console.WriteLine($"What is the member{i+1}'s skill level?");    
+            int  skillLevel = int.Parse(Console.ReadLine ());
+
+            Console.WriteLine($"What is the member{i+1}'s courage factor from 0.0 to 2.0?");
+
+            double courageFactor = double.Parse(Console.ReadLine ());
+            
+            Console.WriteLine($"Hello {name}!  Your skill level is {skillLevel} and your courage factor is {courageFactor}.");
+            var newMember = new teamMember ();
+
+            newMember.createTeamMember(name, skillLevel, courageFactor);
+
+            //  Console.WriteLine(newMember.name);
+
+             myTeam.Add(newMember);
+            }
+            
+             Console.WriteLine($"Good job! You built your team! There are {myTeam.Count} members on your team!");
+
+           Console.WriteLine($"Would you like to try trials to run? Please enter a number.");
+          int trials = int.Parse(Console.ReadLine());
+ 
+        int teamSkillLevel = 0;
+
+            foreach(teamMember member in myTeam){
+                teamSkillLevel += member.skillLevel;
+            };
+
+            int badTrials =0;
+            int goodTrials =0;
+
+            for(int i=0; i<trials; i++){
+           
+            int luck = new Random().Next(-10, 10);
+            int bankTotalDifficulty = bankDifficulty + luck;
+
+            Console.WriteLine($"");
+            Console.WriteLine($"The team's skill level is {teamSkillLevel}");
+            Console.WriteLine($"The bank's difficulty level is {bankTotalDifficulty}");
+
+            if (teamSkillLevel > bankTotalDifficulty){
+                Console.WriteLine("You are right on the money!");
+                goodTrials += 1;
+            } else {
+                Console.WriteLine ("Try again after horning your skills!");
+                badTrials += 1;
+            }
+            Console.WriteLine("----------------------------------");
+            Console.WriteLine("");
+
+            }
+
+            Console.WriteLine($"Your team succeeded in {goodTrials} times!");
+            Console.WriteLine($"Your team failed in {badTrials} times!");
+            //to display team member info
+            // foreach(teamMember teamMember in myTeam){
+            //     Console.WriteLine(teamMember.name);
+            //     Console.WriteLine(teamMember.skillLevel);
+            //     Console.WriteLine(teamMember.courageFactor);
+            //     }  
+
+            // // var myTeam = new Program();
+           
+            
+            // Console.WriteLine();
+
         }
     }
 }
