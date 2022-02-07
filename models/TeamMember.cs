@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace heist
 {
-     public class teamMember
+     public class TeamMember
     {
             public string name {get; set;}
             public int skillLevel {get; set;}
