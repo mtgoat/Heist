@@ -72,39 +72,58 @@ namespace heist
 
             string specialist = Console.ReadLine();
             
+            // this if needs to be refactored. 
             if(specialist =="1"){
-                Hacker newHacker = new Hacker(){
+                Hacker newMember = new Hacker(){
                     name = personName
                 };
-                myRolodex.Add(newHacker);
-                Console.WriteLine(newHacker.name);
+
+                add(newMember);
+                
             }
             else if (specialist =="2"){
-                Muscle newMuscle = new Muscle(){
+                Muscle newMember = new Muscle(){
                     name = personName
                 };
-                myRolodex.Add(newMuscle);
-                
+               
+                add(newMember);
+
             }else if (specialist =="3"){
-                LockSpecialist newLock = new LockSpecialist(){
+                LockSpecialist newMember = new LockSpecialist(){
                     name = personName
                 };
-                myRolodex.Add(newLock);
+
+                add(newMember);
+
             }else{
                 Console.WriteLine("please enter a number from 1 to 3.");
             }
 
+        void add (IRobber newMember){
+            //add skill ,
+        Console.WriteLine("What is a the new person's skill level? please enter between 0 to 100.");
 
-            // switch (specialist){
-            //     case "1":
-            //     //function to add a new member to a hacker
-            //     break;
-            //     case "2":
-            //     string occupation = "Muscle";
-            //     break;
-            // }
+        int personSkill = int.Parse(Console.ReadLine());
 
-            
+        Console.WriteLine($"You typed {personSkill} as a skill level.");
+
+        newMember.skillLevel = personSkill;
+       
+
+        //add cut ,
+        Console.WriteLine("What is a the new person's cut? please enter between 0 to 100.");
+
+        int personCut = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"You typed {personCut} as a skill level.");
+
+        myRolodex.Add(newMember);
+
+        Console.WriteLine($"Currently we have {myRolodex.Count} operatives in the roladex.");
+
+
+        };
+
 
             Console.WriteLine("What is the bank difficulty?");
             int bankDifficulty = int.Parse(Console.ReadLine());
