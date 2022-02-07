@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace heist
 {
     class Program
@@ -57,11 +57,14 @@ namespace heist
 
             Console.WriteLine("Let's add new person to the roladex!");
 
-
-
-            Console.WriteLine("What is a name of the new person to add to the roladex?");
+            while(true){
+                Console.WriteLine("What is a name of the new person to add to the roladex?");
 
             string personName = Console.ReadLine();
+
+            if(personName == ""){
+                    break;
+                }
 
             Console.WriteLine($"You typed {personName} as a name.");
 
@@ -71,7 +74,7 @@ namespace heist
             Lock Specialist (cracks vault): enter 3.");
 
             string specialist = Console.ReadLine();
-            
+
             // this if needs to be refactored. 
             if(specialist =="1"){
                 Hacker newMember = new Hacker(){
@@ -99,6 +102,8 @@ namespace heist
                 Console.WriteLine("please enter a number from 1 to 3.");
             }
 
+            }
+
         void add (IRobber newMember){
             //add skill ,
         Console.WriteLine("What is a the new person's skill level? please enter between 0 to 100.");
@@ -123,6 +128,42 @@ namespace heist
 
 
         };
+            
+//create a new bank object
+
+            Bank BankOfAmericas = new Bank (){
+                cashOnHand = new Random().Next(50000, 1000000),
+                alarmScore = 6,
+                vaultScore = 100,
+                securityGuardScore = 0,
+            };
+            // new Random().Next(0, 100),
+
+  Dictionary <string, int> DictionaryBoA = new Dictionary <string, int> (){
+                {"alarmScore", BankOfAmericas.alarmScore},
+                {"vaultScore", BankOfAmericas.vaultScore},
+                {"securityGuardScore", BankOfAmericas.securityGuardScore},
+            };
+
+string keyOfMaxValue = DictionaryBoA.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+string keyOfMinValue = DictionaryBoA.Aggregate((x, y) => x.Value < y.Value ? x : y).Key;
+
+Console.WriteLine($"Most Secure: {keyOfMaxValue}");
+Console.WriteLine($"Least Secure: {keyOfMinValue}");
+//, BankOfAmericas.alarmScore,BankOfAmericas.vaultScore,BankOfAmericas.securityGuardScore );
+
+//  foreach(Bank obj in BankOfAmericas){
+
+//      var result = Math.Max( obj.cashOnHand, obj.alarmScore);
+      
+// Console.WriteLine("print the highst", result);
+//              Console.WriteLine("Most Secure: Alarm Least Secure: Vault");
+//  } 
+ 
+              
+
+
+
 
 
             Console.WriteLine("What is the bank difficulty?");
