@@ -9,10 +9,102 @@ namespace heist
         {
             Console.WriteLine("Plan Your Heist!");
             //   empty list to fill with myTeam using TeamMember  
-            List<teamMember> myTeam = new List<teamMember>();
+            
+            Hacker Aaron = new Hacker (){
+                name = "Aaron",
+                skillLevel = 75,
+                percentageCut = 20
+            };
+
+            Hacker Andrea = new Hacker (){
+                name = "Andrea",
+                skillLevel = 75,
+                percentageCut = 25
+            };
+
+            Muscle Alice = new Muscle(){
+                name = "Alice",
+                skillLevel = 70,
+                percentageCut = 20
+            };
+
+            LockSpecialist Ace = new LockSpecialist(){
+                 name = "Ace",
+                skillLevel = 50,
+                percentageCut = 20
+            } ;
+
+            LockSpecialist Addy = new LockSpecialist(){
+                name = "Addy",
+                skillLevel = 45,
+                percentageCut = 10
+            } ;
+
+            List<TeamMember> myTeam = new List<TeamMember>();
 
             //const(List<teamMember>) list(myTeam) = [] (new List<teamMember>();)
 
+            //pre-populate the list with 5 or 6 robbers
+            List<IRobber> myRolodex = new List<IRobber>(){
+                Addy,
+                Ace,
+                Alice,
+                Andrea,
+                Aaron
+            };
+
+            Console.WriteLine($"Currently we have {myRolodex.Count} operatives in the roladex.");
+
+            Console.WriteLine("Let's add new person to the roladex!");
+
+
+
+            Console.WriteLine("What is a name of the new person to add to the roladex?");
+
+            string personName = Console.ReadLine();
+
+            Console.WriteLine($"You typed {personName} as a name.");
+
+            Console.WriteLine(@"Next, please select a specialist type from the following.
+            Hacker (Disables alarms): enter 1
+            Muscle (Disarms guards): enter 2
+            Lock Specialist (cracks vault): enter 3.");
+
+            string specialist = Console.ReadLine();
+            
+            if(specialist =="1"){
+                Hacker newHacker = new Hacker(){
+                    name = personName
+                };
+                myRolodex.Add(newHacker);
+                Console.WriteLine(newHacker.name);
+            }
+            else if (specialist =="2"){
+                Muscle newMuscle = new Muscle(){
+                    name = personName
+                };
+                myRolodex.Add(newMuscle);
+                
+            }else if (specialist =="3"){
+                LockSpecialist newLock = new LockSpecialist(){
+                    name = personName
+                };
+                myRolodex.Add(newLock);
+            }else{
+                Console.WriteLine("please enter a number from 1 to 3.");
+            }
+
+
+            // switch (specialist){
+            //     case "1":
+            //     //function to add a new member to a hacker
+            //     break;
+            //     case "2":
+            //     string occupation = "Muscle";
+            //     break;
+            // }
+
+            
 
             Console.WriteLine("What is the bank difficulty?");
             int bankDifficulty = int.Parse(Console.ReadLine());
@@ -43,7 +135,7 @@ namespace heist
             
                 //This instantiate a newMember so we can create a team.    We have to instantiate a instance to add it to createTeamMember
                 //if we do not have newMember then we can't  create team. 
-            teamMember newMember = new teamMember ();// const newMember = {}
+            TeamMember newMember = new TeamMember ();// const newMember = {}
 
             newMember.createTeamMember(name, skillLevel, courageFactor);
 
@@ -59,7 +151,7 @@ namespace heist
  
         int teamSkillLevel = 0;
 
-            foreach(teamMember member in myTeam){
+            foreach(TeamMember member in myTeam){
                 teamSkillLevel += member.skillLevel;
             };
 

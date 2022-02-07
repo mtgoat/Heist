@@ -5,9 +5,9 @@ namespace heist {
     
     public class TeamList
     {
-        List<teamMember> myTeam{get; set;} = new List <teamMember>();
+        List<TeamMember> myTeam{get; set;} = new List <TeamMember>();
 
-        public void addMember(teamMember person)
+        public void addMember(TeamMember person)
         {
             myTeam.Add(person);
         }
