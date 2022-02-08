@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 namespace heist
 {
     class Program
@@ -8,7 +8,6 @@ namespace heist
         static void Main(string[] args)
         {
             Console.WriteLine("Plan Your Heist!");
-            //   empty list to fill with myTeam using TeamMember  
             
             Hacker Aaron = new Hacker (){
                 name = "Aaron",
@@ -41,6 +40,7 @@ namespace heist
             } ;
 
             List<TeamMember> myTeam = new List<TeamMember>();
+            //   empty list to fill with myTeam using TeamMember  
 
             //const(List<teamMember>) list(myTeam) = [] (new List<teamMember>();)
 
@@ -57,11 +57,14 @@ namespace heist
 
             Console.WriteLine("Let's add new person to the roladex!");
 
-
-
-            Console.WriteLine("What is a name of the new person to add to the roladex?");
+            while(true){
+                Console.WriteLine("What is a name of the new person to add to the roladex?");
 
             string personName = Console.ReadLine();
+
+            if(personName == ""){
+                    break;
+                }
 
             Console.WriteLine($"You typed {personName} as a name.");
 
@@ -71,40 +74,144 @@ namespace heist
             Lock Specialist (cracks vault): enter 3.");
 
             string specialist = Console.ReadLine();
-            
+
+            // this if needs to be refactored. 
             if(specialist =="1"){
-                Hacker newHacker = new Hacker(){
+                Hacker newMember = new Hacker(){
                     name = personName
                 };
-                myRolodex.Add(newHacker);
-                Console.WriteLine(newHacker.name);
+
+                add(newMember);
+                
             }
             else if (specialist =="2"){
-                Muscle newMuscle = new Muscle(){
+                Muscle newMember = new Muscle(){
                     name = personName
                 };
-                myRolodex.Add(newMuscle);
-                
+               
+                add(newMember);
+
             }else if (specialist =="3"){
-                LockSpecialist newLock = new LockSpecialist(){
+                LockSpecialist newMember = new LockSpecialist(){
                     name = personName
                 };
-                myRolodex.Add(newLock);
+
+                add(newMember);
+
             }else{
                 Console.WriteLine("please enter a number from 1 to 3.");
             }
 
+            }
+//function to add a newMember to myRolodex list
+        void add (IRobber newMember){
+            //add skill ,
+        Console.WriteLine("What is a the new person's skill level? please enter between 0 to 100.");
 
-            // switch (specialist){
-            //     case "1":
-            //     //function to add a new member to a hacker
-            //     break;
-            //     case "2":
-            //     string occupation = "Muscle";
-            //     break;
-            // }
+        int personSkill = int.Parse(Console.ReadLine());
 
+        Console.WriteLine($"You typed {personSkill} as a skill level.");
+
+        newMember.skillLevel = personSkill;
+       
+
+        //add cut ,
+        Console.WriteLine("What is a the new person's cut? please enter between 0 to 100.");
+
+        int personCut = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"You typed {personCut} as a skill level.");
+
+        myRolodex.Add(newMember);
+
+        Console.WriteLine($"Currently we have {myRolodex.Count} operatives in the roladex.");
+
+
+        };
             
+        //create a new bank object
+
+            Bank BankOfAmericas = new Bank (){
+                cashOnHand = new Random().Next(50000, 1000000),
+                alarmScore = 6,
+                vaultScore = 100,
+                securityGuardScore = 0,
+            };
+            // new Random().Next(0, 100),
+
+  Dictionary <string, int> DictionaryBoA = new Dictionary <string, int> (){
+                {"alarmScore", BankOfAmericas.alarmScore},
+                {"vaultScore", BankOfAmericas.vaultScore},
+                {"securityGuardScore", BankOfAmericas.securityGuardScore},
+            };
+
+string keyOfMaxValue = DictionaryBoA.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
+string keyOfMinValue = DictionaryBoA.Aggregate((x, y) => x.Value < y.Value ? x : y).Key;
+
+Console.WriteLine($"Most Secure: {keyOfMaxValue}");
+Console.WriteLine($"Least Secure: {keyOfMinValue}");
+
+// Print out a report of the rolodex that includes each person's name, specialty, skill level, and cut. Include an index in the report for each operative so that the user can select them by that index in the next step.
+Report myRolodexReport = new Report ();
+
+
+//this is to print out persons in myRoledex with i in a hard way.  At the end of each print, adding the person in myRolodex to the RolodexReport
+
+     Console.WriteLine("----------------- -----------");
+     Console.WriteLine("------myRolodex report-------");
+     int reportIndex = 1; 
+ foreach(IRobber person in myRolodex){
+
+     myRolodexReport.AddContact(reportIndex, person);
+
+
+     Console.WriteLine("----------------------------");
+     Console.WriteLine($"Id: {reportIndex}");
+     Console.WriteLine($"Name: {person.name}");
+     Console.WriteLine($"Speciality: {person.speciality}");
+     Console.WriteLine($"Skill Level: {person.skillLevel}");
+     Console.WriteLine($"Cut: {person.percentageCut}");
+     Console.WriteLine();
+    
+    reportIndex += 1;
+}      
+
+Console.WriteLine("------End of myRolodex report -------");
+
+List<IRobber> crew = new List<IRobber>();
+
+Console.WriteLine("Please select a person to add to the Heist team by the index in the report");
+while(true){
+int indexToAdd = int.Parse(Console.ReadLine());
+
+//in the myRolodexReport, using the GetByIndex method to get a const by its index and adding the contact to the crew list
+crew.Add(myRolodexReport.GetByIndex(indexToAdd));
+
+Console.WriteLine($"You have added {myRolodexReport.GetByIndex(indexToAdd)} to the crew.");
+
+//printing the report after being added to the crew list
+
+ Console.WriteLine("----------------- --------");
+ Console.WriteLine("------myCrew report-------");
+//how to get a total number of objects in the myRolodex dictionary?
+for (int i =1; i < myRolodex.Count; i++ ){
+
+// }
+
+// foreach ( KeyValuePair <int, IRobber> person in myRolodexReport){
+//     Console.WriteLine($"ID ={person.name}");
+// } This cause an error message for not having getEnumorator
+}
+
+// Console.WriteLine("print the highst", result);
+//              Console.WriteLine("Most Secure: Alarm Least Secure: Vault");
+//  } 
+ 
+              
+
+
+
+
 
             Console.WriteLine("What is the bank difficulty?");
             int bankDifficulty = int.Parse(Console.ReadLine());

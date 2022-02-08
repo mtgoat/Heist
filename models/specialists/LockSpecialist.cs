@@ -9,6 +9,11 @@ namespace heist
         public string name { get; set ; }
         public int skillLevel { get ; set ; }
         public int percentageCut { get ; set ; }
+        public string speciality { 
+            get {
+                return "LockSpecialist";
+            } 
+        }
 
         void PerformSkill (Bank bankObj)
      {   

@@ -9,11 +9,11 @@ public interface IRobber {
      int skillLevel {get; set;}
 
      int percentageCut {get; set;}
-
      void PerformSkill (Bank bankObj)
      {
                // to be defined at a class file
      }
 
+     string speciality {get;}
 }
 }
