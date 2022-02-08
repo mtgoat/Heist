@@ -10,6 +10,12 @@ namespace heist
         public int skillLevel { get ; set ; }
         public int percentageCut { get ; set ; }
 
+        public string speciality { 
+            get { 
+                    return "Muscle";
+            }
+        }
+
         void PerformSkill (Bank bankObj)
         {   
                //skillLevel to Bank.AlarmScore
@@ -21,9 +27,15 @@ namespace heist
             }else {
                 Console.WriteLine($"I'm sorry to inform you that we could not get through the security guard.");
             }
+     
+     
      }
+    
+    
+    
+    
+    
+    
+    
     }
-
-
-
 }

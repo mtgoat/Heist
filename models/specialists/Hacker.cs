@@ -9,6 +9,11 @@ namespace heist
         public string name { get; set ; }
         public int skillLevel { get ; set ; }
         public int percentageCut { get ; set ; }
+        public string speciality { 
+            get { 
+                    return "Hacker";
+            }
+        }
 
         void PerformSkill (Bank bankObj)
      {   
@@ -22,8 +27,9 @@ namespace heist
                 Console.WriteLine($"I'm sorry to inform you that we could not hack the alarm system.");
             }
      }
+    
+    
+    
+    
     }
-
-
-
 }
